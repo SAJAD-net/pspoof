@@ -16,6 +16,8 @@ installer() {
 		sr=$HOME/.pschecker/src
 		cd $ch
 		cp pschecker.sh $sr
+		cd ..
+		cp README.md $HOME/.pschecker/
 		echo -n "[+]- are you want to mkae alias for pschecker [y/n] ? "
 		read st
 		cd $HOME
