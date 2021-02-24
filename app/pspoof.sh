@@ -16,6 +16,8 @@ installer() {
 		sr=$HOME/.pspoof/src
 		cd $ch
 		cp pspoof.sh $sr
+		cd ..
+		cp README.md $HOME/.pspoof/
 		echo -n "[+]- are you want to mkae alias for pspoof [y/n] ? "
 		read st
 		cd $HOME
