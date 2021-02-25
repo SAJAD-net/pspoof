@@ -89,10 +89,10 @@ configure() {
 }	
 
 checker() {
+	cd $HOME/.pspoof/out/
 	date >> logs
 	echo "[S]--> --> --> -->" >> logs
 	echo "[!]- started pspoof"
-	cd $HOME/.pspoof/out/
 	date >> pspoof
 	echo "[S]--> --> --> -->" >> pspoof
 	ps -ef >> pspoof
