@@ -1,5 +1,21 @@
 #!/usr/bin/bash
+help() {
+	echo """[!]- * pspoof help *
 
+	[1]- pspoof -i #--> install install
+	[2]- pspoof -c #--> configure
+	[3]- pspoof -s #--> start gathering
+	[4]- pspoof -r #--> read logs
+	[5]- pspoof -h #--> help
+
+	[!]- how to configure :
+
+		minute    hour    day-of-month   month   day-of-week
+
+	   (*,1..59) (*,1..24) (*,1..31)   (*,1..12)  (*,1..7)
+
+		59	*	  *	        *	  *"""
+}
 installer() {
 
 	if [ -d $HOME/.pspoof ]; then
@@ -35,7 +51,7 @@ installer() {
 		echo -n "[+]- are you want to run automatic of time's [y/n] ? "
 		read t
 		if [[ $t == "y" || $t == "Y" ]]; then
-
+			echo "[!]- ok"
 			echo -n "[+]- are you want to default configure app time to run [y/n] ? "
 			read sm
 			if [[ $sm == "y" || $sm == "Y" ]]; then
@@ -53,28 +69,41 @@ installer() {
 
 configure() {
 	initialize() {
-		echo "time=1h" > config.conf
+		echo "59	*	*	*	*	$USER	bash $HOME/.pspoof/src/pspoof.sh -s >> pspoof >> $HOME/.pspoof/out/logs" > pspoof
+		sudo cp pspoof /etc/cron.d/
 	}
 	config() {
-		echo -n "[+]- enter your time for run pspoof --> [{1..9d OR h OR m}] --> "
+		echo -n "[+]- are you want to see help of configure [y/n] ?"
+		read n
+		if [[ $n == "y" || $m == "Y" ]]; then
+			help
+		fi	
+		echo -n "[+]- enter your time for run pspoof [seperator={1}space] --> "
 		read time
-		echo time=$time > config.conf
+		#TODO: check a time is valid
+		echo "$time	$USER	bash $HOME/.pspoof/src/pspoof.sh -s >>  $HOME/.pspoof/out/logs" > pspoof
+		sudo cp pspoof /etc/cron.d/
 		echo "[!]- config successfully changed !"
 	}
 }	
 
 checker() {
+	date >> logs
+	echo "[S]--> --> --> -->" >> logs
 	echo "[!]- started pspoof"
 	cd $HOME/.pspoof/out/
-	date >> logs
-	ps -ef >> logs
-	echo "[!]- copied result to $HOME/.pspoof/out/logs file "
+	date >> pspoof
+	echo "[S]--> --> --> -->" >> pspoof
+	ps -ef >> pspoof
+	echo "[E]<-- <-- <-- <--" >> pspoof
+	echo "[!]- copied result to $HOME/.pspoof/out/pspoof file "
 	echo "[!]- finished !"
+	echo "[E]<-- <-- <-- <--" >> logs
 }
 
 reader() {
 
-	less $HOME/.pspoof/out/logs
+	less $HOME/.pspoof/out/pspoof
 
 }
 
@@ -87,6 +116,8 @@ elif [[ $1 == "-c" || $2 == "-c" ]]; then
 	config
 elif [[ $1 == "-r" || $2 == "-r" ]]; then
 	reader
+elif [[ $1 == "-h" || $2 == "-h" ]]; then
+	help
 else
 	echo "[!]- enter valid argument !"
 	echo """
@@ -94,5 +125,6 @@ else
 	[2] -s --> start process gathering
 	[3] -c --> configure
 	[4] -r --> read logs
+	[5] -h --> help
 	""" 
 fi
