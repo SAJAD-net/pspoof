@@ -3,7 +3,7 @@
 help() {
 	echo """[!]- * pspoof help *
 
-	[1]- pspoof -i #--> install install
+	[1]- pspoof -i #--> install it
 	[2]- pspoof -c #--> configure
 	[3]- pspoof -s #--> start gathering
 	[4]- pspoof -r #--> read logs
@@ -35,7 +35,7 @@ installer() {
 		cp pspoof.sh $sr
 		cd ..
 		cp README.md $HOME/.pspoof/
-		echo -n "[+]- are you want to mkae alias for pspoof [y/n] ? "
+		echo -n "[+]- are you want to create alias for pspoof [y/n] ? "
 		read st
 		cd $HOME
 		if [[ $st == "y" || $st == "Y" ]]; then
@@ -44,12 +44,12 @@ installer() {
 			elif [ echo $SHELL == "/bin/bash" ]; then
 				sudo echo  alias pspoof=\"bash $HOME/.pspoof/src/pspoof.sh\" >> .bashrc;
 			fi
-			echo "[!]- maked alias pspoof for you !"
+			echo "[!]- alias ​​pspoof created for you!"
 		else
-			echo "[!]- not maked alias pspoof for you !"
+			echo "[!]- Alias ​​pspoof not created for you !"
 		fi
 		cd $HOME/.pspoof/lib
-		echo -n "[+]- are you want to run automatic of time's [y/n] ? "
+		echo -n "[+]- do you want it to run automatically [y/n] ? "
 		read t
 		if [[ $t == "y" || $t == "Y" ]]; then
 			echo "[!]- ok"
@@ -74,7 +74,7 @@ configure() {
 		sudo cp pspoof /etc/cron.d/
 	}
 	config() {
-		echo -n "[+]- are you want to see help of configure [y/n] ?"
+		echo -n "[+]- want to look at the configuration guide [y/n] ?"
 		read n
 		if [[ $n == "y" || $m == "Y" ]]; then
 			help
