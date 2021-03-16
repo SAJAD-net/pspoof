@@ -44,9 +44,9 @@ installer() {
 			elif [ echo $SHELL == "/bin/bash" ]; then
 				sudo echo  alias pspoof=\"bash $HOME/.pspoof/src/pspoof.sh\" >> .bashrc;
 			fi
-			echo "[!]- alias ​​pspoof created for you!"
+			echo "[!]- alias pspoof created for you!"
 		else
-			echo "[!]- Alias ​​pspoof not created for you !"
+			echo "[!]- Alias pspoof not created for you !"
 		fi
 		cd $HOME/.pspoof/lib
 		echo -n "[+]- do you want it to run automatically [y/n] ? "
