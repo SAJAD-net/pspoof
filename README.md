@@ -4,6 +4,6 @@
 
 ## how to run
 	1- bash pspoof.sh -i --> install it
-	2- restart pc
+	2- open new bash
 	You can run it yourself or configure it to run at specific times.
 
